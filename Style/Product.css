@@ -1,0 +1,13 @@
+.product-image {
+    width: 140px;
+    height: 130px;
+
+    display: block;
+    margin: 0 auto;
+}
+
+.product:hover {
+    transform: scale(1.02);
+    box-shadow: 2px 2px 10px #ffcc00;
+}
+

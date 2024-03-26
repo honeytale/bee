@@ -1,0 +1,710 @@
+<!Doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Продукти</title>
+  <link rel = "icon" href="Image/Honey-House.png" type = "image/x-icon">
+  <meta name="keywords" content="Honey, Bee, House, Queen bee, Мед, Восък, Пчели, Царица пчела">
+  <meta name="author" content="Kadir Yazadzhi">
+  <meta name="description" content="Открийте най-висококачествения мед и продукти от пчели.">
+  <meta http-equiv="content-language" content="bg">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Honey House">
+  <meta property="og:image" content="Image/Honey-House.png">
+  <meta property="og:url" content="">
+  <meta property="og:type" content="website">
+
+  <link rel="stylesheet" href="Style/Style.css">
+  <link rel="stylesheet" href="Style/Navbar.css">
+  <link rel="stylesheet" href="Style/Home.css">
+  <link rel="stylesheet" href="Style/Product.css">
+  <link rel="stylesheet" href="Style/All.css">
+  <link rel="stylesheet" href="Style/Carousel.css">
+  <link rel="stylesheet" href="Style/Theme.css">
+  <link rel="stylesheet" href="Style/Cart.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+
+<body class="bg-white" >
+
+
+
+<div class="cartIcon" id="cartIcon"><img class="logo-cart" src="Image/shopping-cart%20(1).png"> </div>
+<div id="cart">
+  <div id="closeCart">&#10006;</div>
+  <h2>Shopping Cart</h2>
+  <div id="cartContent"></div>
+  <div id="totalPrice">Total: 0.00 лв.</div>
+  <button id="checkoutBtn">Checkout</button>
+  <button id="cancelBtn">Cancel</button>
+</div>
+<div id="checkoutModal" class="modal">
+  <div class="modal-content" id="namemodal">
+    <span class="close" id="closeNameModal">&times;</span>
+    <h2>Checkout</h2>
+    <form class="cartForm" id="checkoutForm" data-firstname="" data-lastname="" data-phonenumber="" data-address="" data-deliveryprovider="">
+      <label class="cartLabel" for="firstName">First Name:</label>
+      <input class="cartInput" type="text" id="firstName" name="firstName" required>
+      <span id="firstNameError" class="error"></span>
+
+      <label class="cartLabel" for="lastName">Last Name:</label>
+      <input class="cartInput" type="text" id="lastName" name="lastName" required>
+      <span id="lastNameError" class="error"></span>
+
+      <label class="cartLabel" for="phoneNumber">Phone Number:</label>
+      <input class="cartInput" type="tel" id="phoneNumber" name="phoneNumber" required>
+      <span id="phoneNumberError" class="error"></span>
+
+      <label class="cartLabel" for="address">Address:</label>
+      <textarea class="cartInput" id="address" name="address" required></textarea>
+      <span id="addressError" class="error"></span>
+
+      <label class="cartLabel">Delivery Provider:</label>
+      <label class="radio-container">
+        <input type="radio" name="deliveryProvider" value="Ekont" checked>
+        <span class="checkmark"></span>
+        Ekont
+      </label>
+      <label class="radio-container">
+        <input type="radio" name="deliveryProvider" value="Speedy">
+        <span class="checkmark"></span>
+        Speedy
+      </label>
+
+      <label class="cartLabel" for="totalPrice">Total Price:</label>
+      <input class="cartInput" type="text" id="totalPriceCheckout" name="totalPrice" readonly>
+
+      <button class="buttonCheckout" id="next" type="button">Next</button>
+    </form>
+  </div>
+
+  <div class="modalcard" id="modalcard">
+    <div class="modal-content">
+      <span class="close" id="closeCardModal">&times;</span>
+      <h2>Checkout</h2>
+      <div class="img-box-big">
+        <div class="img-box">
+          <img class="img-box-small" src="Image/visa-card.png">
+        </div>
+        <div class="img-box">
+          <img class="img-box-small" src="Image/american-express-card.png">
+        </div>
+        <div class="img-box">
+          <img class="img-box-small" src="Image/card-1.png">
+        </div>
+      </div>
+      <form class="cartForm" id="cardForm">
+        <label class="cartLabel" for="cardNumber">Card Number:</label>
+        <input class="cartInput" type="text" id="cardNumber" name="cardNumber" placeholder="Enter your card number" required>
+        <span id="cardNumberError" class="error"></span>
+
+        <label class="cartLabel" for="cardHolder">Card Holder:</label>
+        <input class="cartInput" type="text" id="cardHolder" name="cardHolder" placeholder="Enter the card holder's name" required>
+        <span id="cardHolderError" class="error"></span>
+
+        <label class="cartLabel" for="expiryDate">Expiry Date:</label>
+        <input class="cartInput" type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required>
+        <span id="expiryDateError" class="error"></span>
+
+        <label class="cartLabel" for="cvv">CVV:</label>
+        <input class="cartInput" type="text" id="cvv" name="cvv" placeholder="Enter the CVV" required>
+        <span id="cvvError" class="error"></span>
+
+        <button class="buttonCheckout" type="button" id="payNowButton">Pay Now</button>
+      </form>
+    </div>
+  </div>
+
+
+
+  <div id="messageModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeAll">&times;</span>
+      <div id="messageContent"></div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<header>
+  <div id="menu-jk" class="nav-part shadow-md bg-white navcol">
+    <div class="container-lg">
+      <div class="row  p-2">
+        <div class="col-lg-4 p-2">
+          <img class="max-230" src="Image/logo.png" alt="logo">
+          <a  data-bs-toggle="collapse" data-bs-target="#menu" class="float-end d-lg-none pt-1 ps-3"><i class="bi pt-1 fs-1 cp bi-list"></i></a>
+        </div>
+        <div id="menu" class="col-lg-8 d-none d-lg-block">
+          <ul class="fw-bold float-end nacul fs-7">
+            <li class="float-start p-3 px-4"><a href="index.html">Начало</a></li>
+            <li class="float-start p-3 px-4"><a href="About%20us.html">За нас</a></li>
+            <li class="float-start p-3 px-4"><a href="Product.html">Продукти</a></li>
+            <li class="float-start p-3 px-4"><a href="Blog.html">Статии</a></li>
+            <li class="float-start p-3 px-4"><a href="Contact.html">Контакти</a></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="menu" style="--hue: 200.48724706615747">
+  <input class="menu__toggle" type="checkbox" id="menu-toggle"/>
+  <label class="menu__toggle-label" for="menu-toggle"></label>
+  <label class="menu__toggle-label menu__toggle-label--closer" for="menu-toggle">
+    <svg class="menu__icon" preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
+      <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"></path>
+    </svg>
+    <svg class="menu__icon" preserveAspectRatio="xMinYMin" viewBox="0 0 24 24">
+      <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"></path>
+    </svg>
+  </label>
+  <ul class="menu__content">
+    <li class="menu__item" style="--x: 20; --y: 15;"><a class="menu__link" href="index.html">Начало</a></li>
+    <li class="menu__item" style="--x: 52; --y: 24;"><a class="menu__link" href="About%20us.html">За нас</a></li>
+    <li class="menu__item" style="--x: 33; --y: 40;"><a class="menu__link" href="Product.html">Продукти</a></li>
+    <li class="menu__item" style="--x: 50; --y: 56;"><a class="menu__link" href="Blog.html">Статии</a></li>
+    <li class="menu__item" style="--x: 72; --y: 72;"><a class="menu__link" href="Contact.html">Контакти</a></li>
+  </ul>
+</nav>
+<style>
+  .menu {
+    display: none;
+  }
+
+
+
+
+  @media (max-width: 768px) {
+
+    .menu {
+      display: block;
+    }
+    header {
+      display: none;
+    }
+  }
+
+</style>
+<!--  ************************* Page Title Starts Here ************************** -->
+<div class="page-nav no-margin row">
+  <div class="container">
+    <div class="row">
+      <h2 class="text-start">Продукти</h2>
+      <ul>
+        <li> <a href="index.html"><i class="bi bi-house-door"></i>Начало</a></li>
+        <li><i class="bi bi-chevron-double-right pe-2"></i>Продукти</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+  .special {
+    text-decoration: none;
+    outline: none;
+    color: #FFFFFF
+  }
+  .special:hover {
+    text-decoration: none;
+    outline: none;
+    color: #000000
+  }
+</style>
+<!-- ******************** About US Starts Here ******************* -->
+<div class="box">
+  <a href="Rent.html">
+
+  <img class="img-box" src="Image/naem-kosher.png">
+  </a>
+</div>
+<div class="container-fluid products big-padding px-3 bg-honey">
+  <div class="container-xl">
+    <div class="row">
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/акация.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Мед от Акация</h4>
+              <span class="fw-bolder fs-4">10.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart1">
+              <button class="btn btn-primary px-5"> <a class="special" href="Product-1.html"> Buy Now</a></button>
+            </div>
+
+          </div>
+
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/липа.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Мед от липа</h4>
+              <span class="fw-bolder fs-4">7.50 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart2">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-2.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/букет.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Мед - Букет</h4>
+              <span class="fw-bolder fs-4">7.50 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart3">
+              <button class="btn btn-primary px-5"><a class="special" style="" href="Product-3.html">Buy Now </a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/рапица.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Мед от Рапица</h4>
+              <span class="fw-bolder fs-4">7.50 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart4">
+              <button class="btn btn-primary px-5"> <a class="special" href="Product-4.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/боров%20мед.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Боров Мед</h4>
+              <span class="fw-bolder fs-4">7.50 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart5">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-5.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/лавандула.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Мед от Лавандула</h4>
+              <span class="fw-bolder fs-4">8.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart6">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-6.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/роза.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Мед от Роза</h4>
+              <span class="fw-bolder fs-4">10.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart7">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-7.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/ванилия.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Ванилия</h4>
+              <span class="fw-bolder fs-4">8.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart8">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-8.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/ягода.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Ягода</h4>
+              <span class="fw-bolder fs-4">8.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart9">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-9.html">Buy Now </a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/лимонови%20корички.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Лимон</h4>
+              <span class="fw-bolder fs-4">8.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart10">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-10.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/портокалови%20корички.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Портокал</h4>
+              <span class="fw-bolder fs-4">8.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart11">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-11.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/крем%20мед%20кокос.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Кокос</h4>
+              <span class="fw-bolder fs-4">8.00 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart12">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-12.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/канела.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Канела</h4>
+            <span class="fw-bolder fs-4">8.00 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart19">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-19.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/какао.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Крем Мед - Какао</h4>
+            <span class="fw-bolder fs-4">8.00 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart20">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-20.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/орехи.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед с орехи</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart21">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-21.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/фъстък.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед с Фъстък</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart22">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-22.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/шамфъстък.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед с Шамфъстък</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart23">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-23.html">Buy Now</a></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/манго.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед с Манго</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart24">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-24.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/бадеми.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед с Бадеми</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart25">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-25.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/горски%20плодове.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед с Горски Плодове</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart26">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-26.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/стафиди.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Мед със стафиди</h4>
+            <span class="fw-bolder fs-4">8.50 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart27">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-27.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/черен%20бъз.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Сироп от Черен Бъз</h4>
+              <span class="fw-bolder fs-4">12.70 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart13">
+              <button class="btn btn-primary px-5"> <a class="special" href="Product-13.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/бял%20бъз.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Сироп от Бял Бъз</h4>
+              <span class="fw-bolder fs-4">15.60 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart14">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-14.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/бъз%20и%20ягода.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Сироп от Бъз и Ягода</h4>
+              <span class="fw-bolder fs-4">15.60 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart15">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-15.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/череша%20с%20цвят%20бъз.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Сироп от Бъз и Череша</h4>
+            <span class="fw-bolder fs-4">15.60 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart28">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-28.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+          <div class="product bg-white p-4 text-center shadow-md">
+            <img class="product-image" src="Image/джинджифил%20и%20бял%20бъз.png" alt="">
+            <div class="d-inline-block">
+              <h4 class="fw-bolder fs-5 mt-4">Сироп от джинджифил и бял бъз</h4>
+              <span class="fw-bolder fs-4">15.60 лв.</span>
+            </div>
+            <div class="d-inline-block mt-3">
+              <img src="Image/cart%20(1).png" class="cart-product" id="cart16">
+              <button class="btn btn-primary px-5"><a class="special" href="Product-16.html">Buy Now</a></button>
+            </div>
+
+          </div>
+      </div>
+
+      <div class="col-lg-3 col-md-4 mb-4">
+        <div class="product bg-white p-4 text-center shadow-md">
+          <img class="product-image" src="Image/меден%20концентрат%20горски%20плодове.png" alt="">
+          <div class="d-inline-block">
+            <h4 class="fw-bolder fs-5 mt-4">Сироп от Горски Плодове</h4>
+            <span class="fw-bolder fs-4">15.60 лв.</span>
+          </div>
+          <div class="d-inline-block mt-3">
+            <img src="Image/cart%20(1).png" class="cart-product" id="cart17">
+            <button class="btn btn-primary px-5"><a class="special" href="Product-17.html">Buy Now</a></button>
+          </div>
+
+        </div>
+      </div>
+
+
+<footer>
+  <div class="inner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 foot-about">
+          <h4>За нас</h4>
+
+          <p>Ние сме фирма за продажба на мед и пчелни продукти. Ние сме синоним на качество, отговорност и добро отношение. </p>
+
+          <ul>
+            <li>гр. Благоевград 2700, жк Ален Мак ул. „Борис Ангелушев“</li>
+            <li>******@abv.bg</li>
+            <li>089 134 5678</li>
+          </ul>
+        </div>
+
+        <div class="col-md-3 foot-post">
+          <h4>Последни статии</h4>
+
+          <div class="post-row">
+            <div class="image">
+              <img  src="Image/blog-2.jpg" alt="">
+            </div>
+            <div class="detail">
+              <p>Професията пчелар</p>
+            </div>
+          </div>
+
+          <div class="post-row">
+            <div class="image">
+              <img src="Image/blog-3.jpg" alt="">
+            </div>
+            <div class="detail">
+              <p>Меда - ползи</p>
+            </div>
+          </div>
+
+          <div class="post-row">
+            <div class="image">
+              <img src="Image/block-4.jpg" alt="">
+            </div>
+            <div class="detail">
+              <p>Оборудването на един пчелар</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 foot-services">
+          <h4>Other</h4>
+
+          <ul>
+            <li><a href="">Privacy police</a></li>
+            <li><a href="">Our Services</a></li>
+            <li><a href="">Terms & Conditions</a></li>
+
+          </ul>
+        </div>
+
+        <div class="col-md-3 foot-news">
+          <h4>Новини</h4>
+          <p>Очаквайте нови изненади от нас.</p>
+
+          <div class="input-group mb-3">
+            <input style="outline: none; border: none; background-color: #FFFFFF; box-shadow: none" type="text" class="form-control mb-0" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <span class="input-group-text bg-primary" id="basic-addon2"><i class="bi text-white bi-send"></i></span>
+            </div>
+          </div>
+
+          <ul>
+            <li><i class="bi bi-facebook"></i></li>
+            <li><i class="bi bi-instagram"></i></li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="copy">
+  <div class="container">
+    <a href="index.html">2024 &copy; All Rights Reserved | Designed and Developed by: <a href="https://thetrackone.github.io/thetrack/Profile.html"> Kadir Yazadzhi</a> </a>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript" src="Script/Cart.js"></script>
+<script type="text/javascript" src="Script/Cart%20-%20Other.js"></script>
+</html>
